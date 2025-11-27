@@ -1,5 +1,5 @@
 [build]
-buildCommand = "g++ -std=c++17 -O3 -static backend-api/motor_adn.cpp -o backend-api/motor_adn && chmod +x backend-api/motor_adn"
+buildCommand = "g++ -std=c++17 -O3 -static motor_adn.cpp -o motor_adn && chmod +x motor_adn"
 
 [deploy]
-startCommand = "cd backend-api && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
