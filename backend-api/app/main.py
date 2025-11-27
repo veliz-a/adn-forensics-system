@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.models import SessionLocal, User, SearchHistory, init_db
 from app.auth import hash_password, verify_password, create_access_token, decode_token
 from pydantic import BaseModel
+import os, subprocess
 import subprocess
 import json
 import os
@@ -133,7 +134,9 @@ async def search(
     csv_file: UploadFile = File(...),
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
-):
+):  
+    print("Archivos en /app:", os.listdir("/app"))
+    
     # Validar algoritmo
     if algorithm not in ["kmp", "rabin_karp"]:
         raise HTTPException(status_code=400, detail="Algoritmo debe ser 'kmp' o 'rabin_karp'")
