@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 from app.models import SessionLocal, User, SearchHistory, init_db
 from app.auth import hash_password, verify_password, create_access_token, decode_token
 from pydantic import BaseModel
-import os, subprocess
 import subprocess
 import json
 import os
@@ -217,32 +216,4 @@ def get_history(
             for s in searches
         ],
         "total": total
-    }
-
-
-@app.get("/debug-motor")
-def debug_motor():
-    import os, subprocess
-
-    files = os.listdir("/app")  # lista los archivos en la carpeta principal
-    motor_path = "/app/motor_adn"
-
-    motor_exists = os.path.isfile(motor_path)
-    motor_executable = os.access(motor_path, os.X_OK)
-
-    try:
-        if motor_exists and motor_executable:
-            # prueba rápida de ejecución (puedes cambiar "--version" por algún flag válido)
-            result = subprocess.run([motor_path, "--version"], capture_output=True, text=True)
-            output = result.stdout.strip()
-        else:
-            output = "Motor no encontrado o no ejecutable"
-    except Exception as e:
-        output = f"Error ejecutando motor: {e}"
-
-    return {
-        "archivos_en_app": files,
-        "motor_exists": motor_exists,
-        "motor_executable": motor_executable,
-        "motor_output": output
     }
