@@ -10,7 +10,6 @@ import subprocess
 import json
 import os
 import tempfile
-from pathlib import Path
 
 app = FastAPI(title="ADN Forensics API")
 app.add_middleware(
@@ -21,8 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 security = HTTPBearer()
-BASE_DIR = Path(__file__).resolve().parent.parent
-MOTOR_PATH = BASE_DIR / "motor_adn.exe" 
 
 # Inicializa BD al arrancar
 @app.on_event("startup")
@@ -150,7 +147,7 @@ async def search(
     try:
         # Ejecutar motor C++
         cmd = [
-            str(MOTOR_PATH),
+            "../motor_adn.exe",  # ajusta la ruta
             "--algorithm", algorithm,
             "--pattern", pattern,
             "--csv", tmp_path
