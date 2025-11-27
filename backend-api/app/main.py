@@ -145,7 +145,7 @@ def search(
     try:
         # Ejecutar motor C++ (ajusta la ruta según tu sistema)
         cmd = [
-            "./motor_adn.exe",  # Windows
+            "../motor-cpp/motor_adn",  # Windows
             # "./motor_adn",    # Linux/Mac
             "--algorithm", req.algorithm,
             "--pattern", req.pattern,
