@@ -12,7 +12,6 @@ motor-cpp/cmake-build-*/
 motor-cpp/out/
 
 # Compiled binaries
-*.exe
 *.out
 *.app
 *.o
